@@ -4,7 +4,8 @@
 
 body {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     padding: 50px;
 }
 .numButtons {
@@ -85,4 +86,9 @@ button {
 
 #DELETE {
     background-color: cornflowerblue;
+}
+
+.credits {
+    font-weight: bold;
+    margin-top: 20px;
 }

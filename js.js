@@ -28,6 +28,9 @@ function operate (num1, operator, num2) {
     } else if (operator == "×") {
         return multiply(num1, num2);
     } else if (operator == "÷") {
+        if (num2 == 0) {
+            return "Can't divide by 0 silly!";
+        }
         return divide(num1, num2);
     }
 }
@@ -56,11 +59,19 @@ let sign;
 opButtons.forEach(btn => {
     btn.textContent = btn.id;
     btn.addEventListener('click', () => {
-        if (num1 != undefined) {
-            if (num2 !== undefined) {
+        if (num1 !== undefined) {
+            let temp = num1;
+            if (num2 != undefined && num2 != "") {
                 num1 = operate(num1, sign, num2); // Perform ongoing calculation
+                if (typeof num1 !== "number" || num1 == Infinity) {
+                    num1 = temp;
+                }
             } else {
-                num1 = parseFloat(lower.textContent);
+                if (typeof num1 !== "number") {
+                    num1 = temp;
+                } else {
+                    num1 = parseFloat(lower.textContent);
+                }
             }
             sign = btn.id;
             upper.textContent = num1 + " " + sign;
@@ -73,12 +84,11 @@ opButtons.forEach(btn => {
 const equalButton = document.querySelector("#\\=");
 equalButton.addEventListener('click', () => {
     let result;
-    if (num1 != undefined && num2 != undefined) {
+    if (num1 != undefined) {
         result = operate(num1, sign, num2);
     }
     lower.textContent = result;
     upper.textContent = "";
-    num1 = result;
     clickedButton = "";
 });
 
