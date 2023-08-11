@@ -59,24 +59,26 @@ let sign;
 opButtons.forEach(btn => {
     btn.textContent = btn.id;
     btn.addEventListener('click', () => {
-        if (num1 !== undefined) {
-            let temp = num1;
-            if (num2 != undefined && num2 != "") {
-                num1 = operate(num1, sign, num2); // Perform ongoing calculation
-                if (typeof num1 !== "number" || num1 == Infinity) {
-                    num1 = temp;
-                }
-            } else {
-                if (typeof num1 !== "number") {
-                    num1 = temp;
+        if (!isNaN(parseFloat(lower.textContent))) {
+            if (num1 !== undefined) {
+                let temp = num1;
+                if (num2 != undefined && num2 != "") {
+                    num1 = operate(num1, sign, num2);
+                    if (typeof num1 !== "number" || num1 == Infinity) {
+                        num1 = temp;
+                    }
                 } else {
-                    num1 = parseFloat(lower.textContent);
+                    if (typeof num1 !== "number") {
+                        num1 = temp;
+                    } else {
+                        num1 = parseFloat(lower.textContent);
+                    }
                 }
+                sign = btn.id;
+                upper.textContent = num1 + " " + sign;
+                clickedButton = "";
+                num2 = undefined; // Reset num2 for the next number entry
             }
-            sign = btn.id;
-            upper.textContent = num1 + " " + sign;
-            clickedButton = "";
-            num2 = undefined; // Reset num2 for the next number entry
         }
     });
 });
