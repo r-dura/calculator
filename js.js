@@ -67,6 +67,8 @@ opButtons.forEach(btn => {
                     if (typeof num1 !== "number" || num1 == Infinity) {
                         num1 = temp;
                     }
+                } else if (upper.textContent != "" && lower.textContent != "") {
+                    upper.textContent = num1 + " " + sign;
                 } else {
                     if (typeof num1 !== "number") {
                         num1 = temp;
